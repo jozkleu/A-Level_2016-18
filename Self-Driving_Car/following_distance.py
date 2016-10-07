@@ -1,83 +1,42 @@
 """ Self-Driving Car: Following Distance
-    Name: 
-    Date: 
+    Name: Jozua Kleu
+    Date: 05/10/2016
     """
 
-# global constants
 
-VEHICLE_LENGTH = 4      # meters 
-MIN_DISTANCE = VEHICLE_LENGTH / 2
+def optimum_distances(front_car, behind_car):
 
-# functions
+    equal_distance = (front_car + behind_car)/2
+    return equal_distance
 
-def get_equal_distance(dist_front, dist_rear):
-    """ Function to return target following distance, ensuring that the
-        vehicle in front and the vehicle behind are equidistant.
-        """
-    # your code goes here
+def weather(current_weather, optimum_distance):
 
-def get_safe_distance(curr_speed, weather):
-    """ Function to return safe following distance as per UK regulations,
-        e.g. the 2 second rule adapted to weather conditions.
-        """ 
-    # your code goes here
+    if current_weather == "clear":
+        return optimum_distance
+    elif current_weather == "rain" or current_weather == "low visibility":
+        optimum_distance =  optimum_distance*2
+        return optimum_distance
+    else:
+        print("Please input a vaild weather condition! (clear, rain or low visibilty)")
+        return ("invalid") 
 
 def main():
-    """ Main function; contains various test cases for each scenario.
-        """
-    # ----------------------------------------------------------
-    # Scenario 1: Equal distance between front and rear vehicles
-    # ----------------------------------------------------------
-    
-    print("Scenario 1:")
 
-    # Test 1: (outputs 3.5)
-    distance_front = 2  # meters
-    distance_rear = 5   # meters
+    front_car = int(input("what is the distance between the car in front and yourself"))
+    behind_car = int(input("what is the distance between the car behind and yourself"))
+    speed = int(input("what is the current speed in mph"))
+    while True:
+        optimum_distance = optimum_distances(front_car, behind_car)
+        break
+    while True:
+        current_weather = input("what is the current weather type: either - clear, rain or low visibility").lower()
+        final_distance = weather(current_weather, optimum_distance)
+        break
 
-    target_distance = get_equal_distance(distance_front, distance_rear)
-    print(target_distance)
+    print ("the optimum distance between both cars is", final_distance,"meters away from both")
 
-    # Test 2: (outputs 4.0)
-    distance_front = 5  # meters
-    distance_rear = 3   # meters
-
-    target_distance = get_equal_distance(distance_front, distance_rear)
-    print(target_distance)
-
-    # Test 3: (outputs 5.5)
-    distance_front = 1  # meters
-    distance_rear = 10  # meters
-
-    target_distance = get_equal_distance(distance_front, distance_rear)
-    print(target_distance)
-
-    # ----------------------------------------------------------
-    # Scenario 2: Safe following distances as per UK regulations
-    # ----------------------------------------------------------
-
-    print("Scenario 2:")
-
-    # Test 1: (outputs 2.0)
-    current_speed = 0  # mph
-    weather_condition = "normal"
-
-    target_distance = get_safe_distance(current_speed, weather_condition)
-    print(target_distance)
-
-    # Test 2: (outputs 24.0)
-    current_speed = 60  # mph
-    weather_condition = "normal"
-
-    target_distance = get_safe_distance(current_speed, weather_condition)
-    print(target_distance)
-
-    # Test 3: (outputs 48.0)
-    current_speed = 60  # mph
-    weather_condition = "poor"
-
-    target_distance = get_safe_distance(current_speed, weather_condition)
-    print(target_distance)    
+    #optimum distance fron front car at current speed
+        
 
 
 if __name__ == "__main__":
